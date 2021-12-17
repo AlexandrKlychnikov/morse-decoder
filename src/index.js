@@ -38,7 +38,19 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const phrase = expr.match(/.{1,10}/g);
+    const arrayMorseSymbol = phrase.map( element => {
+      if (element === '**********') {
+        return ' '
+      } else {
+        let payload = element.substring((element.indexOf('1')))
+        let dotDash = payload.match(/.{1,2}/g);
+        let morseSymbol = dotDash.map( e => e < 11 ? '.' : '-').join('');
+        return MORSE_TABLE[morseSymbol];
+      }
+    } )
+     
+    return arrayMorseSymbol.join('');
 }
 
 module.exports = {
